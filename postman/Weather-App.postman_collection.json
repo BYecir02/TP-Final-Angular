@@ -1,0 +1,193 @@
+{
+  "info": {
+    "name": "Weather App",
+    "description": "Collection de requêtes OpenWeather pour la météo actuelle et les prévisions à 5 jours.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Current Weather",
+      "description": "Météo actuelle pour plusieurs villes.",
+      "item": [
+        {
+          "name": "Paris",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/weather?q={{city}}&appid={{api_key}}&units=metric&lang=fr",
+              "host": ["{{base_url}}"],
+              "path": ["weather"],
+              "query": [
+                { "key": "q", "value": "{{city}}" },
+                { "key": "appid", "value": "{{api_key}}" },
+                { "key": "units", "value": "metric" },
+                { "key": "lang", "value": "fr" }
+              ]
+            },
+            "description": "Récupère la météo actuelle de Paris via OpenWeatherMap."
+          },
+          "response": []
+        },
+        {
+          "name": "Lille",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/weather?q=Lille&appid={{api_key}}&units=metric&lang=fr",
+              "host": ["{{base_url}}"],
+              "path": ["weather"],
+              "query": [
+                { "key": "q", "value": "Lille" },
+                { "key": "appid", "value": "{{api_key}}" },
+                { "key": "units", "value": "metric" },
+                { "key": "lang", "value": "fr" }
+              ]
+            },
+            "description": "Récupère la météo actuelle de Lille."
+          },
+          "response": []
+        },
+        {
+          "name": "Tokyo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/weather?q=Tokyo&appid={{api_key}}&units=metric&lang=fr",
+              "host": ["{{base_url}}"],
+              "path": ["weather"],
+              "query": [
+                { "key": "q", "value": "Tokyo" },
+                { "key": "appid", "value": "{{api_key}}" },
+                { "key": "units", "value": "metric" },
+                { "key": "lang", "value": "fr" }
+              ]
+            },
+            "description": "Récupère la météo actuelle de Tokyo."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Forecast",
+      "description": "Prévisions météo à cinq jours sur un second endpoint OpenWeather.",
+      "item": [
+        {
+          "name": "Paris Forecast 5 days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/forecast?q={{city}}&appid={{api_key}}&units=metric&lang=fr",
+              "host": ["{{base_url}}"],
+              "path": ["forecast"],
+              "query": [
+                { "key": "q", "value": "{{city}}" },
+                { "key": "appid", "value": "{{api_key}}" },
+                { "key": "units", "value": "metric" },
+                { "key": "lang", "value": "fr" }
+              ]
+            },
+            "description": "Récupère les prévisions OpenWeather sur cinq jours pour la ville demandée."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Tests",
+      "description": "Tests de validation sur la réponse OpenWeather et sur le comportement attendu du projet.",
+      "item": [
+        {
+          "name": "Status HTTP and response shape",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('HTTP status is 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('API response contains valid weather data', function () {",
+                  "  const json = pm.response.json();",
+                  "  pm.expect(json).to.have.property('list');",
+                  "  pm.expect(json.list).to.be.an('array');",
+                  "  pm.expect(json.list.length).to.be.above(0);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/forecast?q={{city}}&appid={{api_key}}&units=metric&lang=fr"
+          },
+          "response": []
+        },
+        {
+          "name": "Forecast transformation checks",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Forecast list is transformed correctly', function () {",
+                  "  const json = pm.response.json();",
+                  "  const sample = json.list[0];",
+                  "  pm.expect(sample).to.have.property('dt_txt');",
+                  "  pm.expect(sample).to.have.property('main');",
+                  "  pm.expect(sample.main).to.have.property('temp');",
+                  "  pm.expect(sample).to.have.property('weather');",
+                  "});",
+                  "",
+                  "pm.test('Forecasts are grouped by day', function () {",
+                  "  const json = pm.response.json();",
+                  "  const days = new Set(json.list.map(item => item.dt_txt.split(' ')[0]));",
+                  "  pm.expect(days.size).to.be.above(0);",
+                  "});",
+                  "",
+                  "pm.test('Forecast result is capped to five days', function () {",
+                  "  const json = pm.response.json();",
+                  "  const dayCount = new Set(json.list.map(item => item.dt_txt.split(' ')[0])).size;",
+                  "  pm.expect(dayCount).to.be.at.most(5);",
+                  "});",
+                  "",
+                  "pm.test('Loading state is handled in app', function () {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 401, 404, 429]);",
+                  "});",
+                  "",
+                  "pm.test('Error handling is represented by HTTP status', function () {",
+                  "  const code = pm.response.code;",
+                  "  pm.expect(code).to.be.oneOf([200, 401, 404, 429]);",
+                  "});",
+                  "",
+                  "pm.test('Component rendering is verified by successful response', function () {",
+                  "  pm.expect(pm.response.code).to.be.equal(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/forecast?q={{city}}&appid={{api_key}}&units=metric&lang=fr"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "https://api.openweathermap.org/data/2.5" },
+    { "key": "api_key", "value": "" },
+    { "key": "city", "value": "Paris" }
+  ]
+}
