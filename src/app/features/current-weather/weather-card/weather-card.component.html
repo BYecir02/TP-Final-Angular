@@ -1,0 +1,37 @@
+<article class="weather-card">
+  <header class="weather-card__header">
+    <div>
+      <p class="weather-card__label">Météo actuelle</p>
+      <h1>
+        {{ weather().city }} <span>({{ weather().country }})</span>
+      </h1>
+    </div>
+    <img
+      class="weather-card__icon"
+      [src]="iconUrl"
+      [alt]="'Conditions météo : ' + weather().description"
+      width="100"
+      height="100"
+    />
+  </header>
+
+  <div class="weather-card__summary">
+    <strong>{{ weather().temperature | number: '1.0-1' }} °C</strong>
+    <p>{{ weather().description }}</p>
+  </div>
+
+  <dl class="weather-card__details">
+    <div>
+      <dt>Ressenti</dt>
+      <dd>{{ weather().feelsLike | number: '1.0-1' }} °C</dd>
+    </div>
+    <div>
+      <dt>Humidité</dt>
+      <dd>{{ weather().humidity }} %</dd>
+    </div>
+    <div>
+      <dt>Vent</dt>
+      <dd>{{ weather().windSpeed | number: '1.0-1' }} m/s</dd>
+    </div>
+  </dl>
+</article>
