@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.not-found {
+  max-width: 38rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.code {
+  margin: 0;
+  color: var(--color-accent-strong);
+  font-size: clamp(4rem, 15vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+h1 {
+  margin: 1rem 0 0;
+  color: var(--color-heading);
+  font-size: clamp(2rem, 6vw, 3rem);
+}
+
+p:not(.code) {
+  margin: 1rem 0 1.75rem;
+  color: var(--color-text-muted);
+}
+
+a {
+  display: inline-flex;
+  padding: 0.75rem 1.1rem;
+  border-radius: 999px;
+  background: var(--color-heading);
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}

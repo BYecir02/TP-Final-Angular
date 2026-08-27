@@ -1,0 +1,15 @@
+<header class="navbar">
+  <nav class="navbar__content" aria-label="Navigation principale">
+    <a class="brand" routerLink="/home" aria-label="Weather App - Accueil">
+      <span class="brand__icon" aria-hidden="true">☀</span>
+      <span>Weather App</span>
+    </a>
+
+    <div class="navbar__links">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Accueil
+      </a>
+      <a routerLink="/about" routerLinkActive="active">À propos</a>
+    </div>
+  </nav>
+</header>

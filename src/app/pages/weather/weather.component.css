@@ -1,0 +1,34 @@
+:host {
+  display: block;
+}
+
+.page-card {
+  max-width: 44rem;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--color-accent-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  color: var(--color-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+p:last-child {
+  margin: 1rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
