@@ -1,0 +1,53 @@
+.forecast-panel {
+  margin-top: 2rem;
+}
+
+.forecast-status {
+  margin: 0;
+  color: #334155;
+  font-weight: 600;
+}
+
+.forecast-status-error {
+  color: #b91c1c;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.forecast-day {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.forecast-date {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.forecast-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.forecast-temperature {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.forecast-description {
+  margin: 0;
+  color: #475569;
+  text-transform: capitalize;
+}
