@@ -25,7 +25,7 @@ export class CurrentWeatherService {
         feelsLike: response.main.feels_like,
         description: response.weather[0]?.description ?? '',
         humidity: response.main.humidity,
-        windSpeed: response.wind.speed,
+        windSpeed: response.wind.speed * 3.6,
         icon: response.weather[0]?.icon ?? '',
       })),
     );

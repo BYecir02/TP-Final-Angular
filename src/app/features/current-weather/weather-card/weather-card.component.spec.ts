@@ -13,7 +13,7 @@ describe('WeatherCardComponent', () => {
     feelsLike: 17.9,
     description: 'ciel dégagé',
     humidity: 64,
-    windSpeed: 3.6,
+    windSpeed: 12.96,
     icon: '01d',
   };
 
@@ -34,7 +34,7 @@ describe('WeatherCardComponent', () => {
     expect(content).toContain('17.9 °C');
     expect(content).toContain('ciel dégagé');
     expect(content).toContain('64 %');
-    expect(content).toContain('3.6 m/s');
+    expect(content).toContain('13 km/h');
     expect(icon.src).toContain('/01d@2x.png');
     expect(icon.alt).toContain('ciel dégagé');
   });

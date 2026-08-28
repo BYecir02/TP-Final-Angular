@@ -38,7 +38,7 @@ describe('CurrentWeatherService', () => {
         feelsLike: 17.9,
         description: 'ciel dégagé',
         humidity: 64,
-        windSpeed: 3.6,
+        windSpeed: 12.96,
         icon: '01d',
       });
     });
