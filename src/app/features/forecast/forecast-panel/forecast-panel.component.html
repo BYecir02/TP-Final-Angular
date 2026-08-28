@@ -1,0 +1,26 @@
+<section class="forecast-panel" aria-live="polite">
+  @if (forecastState$ | async; as state) {
+    @if (state.status === 'loading') {
+      <p class="forecast-status">Chargement des prévisions...</p>
+    } @else if (state.status === 'error') {
+      <p class="forecast-status forecast-status-error">{{ state.message }}</p>
+    } @else if (!state.forecast.length) {
+      <p class="forecast-status">Prévisions non disponibles pour cette ville.</p>
+    } @else {
+      <div class="forecast-grid">
+        @for (day of state.forecast; track day.date) {
+          <article class="forecast-day">
+            <p class="forecast-date">{{ day.date }}</p>
+            <img
+              class="forecast-icon"
+              [src]="'https://openweathermap.org/img/wn/' + day.icon + '@2x.png'"
+              [alt]="day.description"
+            />
+            <p class="forecast-temperature">{{ day.temperature }}°C</p>
+            <p class="forecast-description">{{ day.description }}</p>
+          </article>
+        }
+      </div>
+    }
+  }
+</section>
