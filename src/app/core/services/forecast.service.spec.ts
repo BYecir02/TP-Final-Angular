@@ -24,13 +24,14 @@ describe('ForecastService', () => {
     const city = 'Paris';
 
     service.getForecast(city).subscribe((forecast) => {
-      expect(forecast.length).toBeLessThanOrEqual(5);
+      expect(forecast).toHaveLength(5);
       expect(forecast[0]).toEqual({
         date: '2025-01-01',
         temperature: 14,
         description: 'Nuageux',
         icon: '04d',
       });
+      expect(forecast.at(-1)?.date).toBe('2025-01-05');
     });
 
     const req = httpMock.expectOne(
@@ -74,6 +75,21 @@ describe('ForecastService', () => {
           dt_txt: '2025-01-03 12:00:00',
           main: { temp: 13 },
           weather: [{ description: 'Pluie légère', icon: '10d' }],
+        },
+        {
+          dt_txt: '2025-01-04 12:00:00',
+          main: { temp: 16 },
+          weather: [{ description: 'Ciel dégagé', icon: '01d' }],
+        },
+        {
+          dt_txt: '2025-01-05 12:00:00',
+          main: { temp: 17 },
+          weather: [{ description: 'Ciel dégagé', icon: '01d' }],
+        },
+        {
+          dt_txt: '2025-01-06 12:00:00',
+          main: { temp: 18 },
+          weather: [{ description: 'Ciel dégagé', icon: '01d' }],
         },
       ],
     });

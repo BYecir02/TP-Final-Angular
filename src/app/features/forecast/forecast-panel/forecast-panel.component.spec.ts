@@ -16,7 +16,7 @@ describe('ForecastPanelComponent', () => {
         {
           provide: ForecastService,
           useValue: {
-            getForecast: jasmine.createSpy('getForecast').and.returnValue(
+            getForecast: vi.fn().mockReturnValue(
               of([
                 { date: '2025-01-01', temperature: 14, description: 'Nuageux', icon: '04d' },
                 { date: '2025-01-02', temperature: 15, description: 'Peu nuageux', icon: '02d' },
