@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { Mock } from 'vitest';
 
 import { CurrentWeather } from '../../core/models/current-weather.model';
 import { CurrentWeatherService } from '../../core/services/current-weather.service';
+import { ForecastService } from '../../core/services/forecast.service';
 import { WeatherComponent } from './weather.component';
 
 describe('WeatherComponent', () => {
@@ -32,6 +33,7 @@ describe('WeatherComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { paramMap: paramMap$ } },
         { provide: CurrentWeatherService, useValue: { getCurrentWeather } },
+        { provide: ForecastService, useValue: { getForecast: vi.fn().mockReturnValue(of([])) } },
       ],
     }).compileComponents();
   });
@@ -63,6 +65,7 @@ describe('WeatherComponent', () => {
 
     expect(fixture.nativeElement.textContent).toContain('Paris');
     expect(fixture.nativeElement.querySelector('app-weather-card')).not.toBeNull();
+    expect(fixture.nativeElement.querySelector('app-forecast-panel')).not.toBeNull();
   });
 
   it('affiche le message dédié pour une erreur 404', () => {
