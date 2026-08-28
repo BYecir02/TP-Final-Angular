@@ -1,0 +1,10 @@
+<form [formGroup]="searchForm" (ngSubmit)="submit()" novalidate>
+  <label for="city">Ville</label>
+  <div class="field-row">
+    <input id="city" type="text" formControlName="city" autocomplete="address-level2" />
+    <button type="submit">Rechercher</button>
+  </div>
+  @if (searchForm.controls.city.invalid && searchForm.controls.city.touched) {
+    <p class="error" role="alert">Veuillez saisir une ville.</p>
+  }
+</form>

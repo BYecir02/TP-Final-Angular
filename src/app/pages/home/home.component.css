@@ -27,7 +27,7 @@ h1 {
 .placeholder {
   display: flex;
   max-width: 34rem;
-  margin: 2.5rem auto 0;
+  margin: 1.25rem auto 0;
   padding: 1.25rem;
   align-items: center;
   gap: 1rem;
