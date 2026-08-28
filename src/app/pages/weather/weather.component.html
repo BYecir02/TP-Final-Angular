@@ -1,8 +1,15 @@
-<section class="page-card">
-  <p class="eyebrow">Météo actuelle</p>
-  <h1>Les conditions de votre ville</h1>
-  <p>
-    Retrouvez la température, le ressenti, l'humidité, le vent et la description météo de la ville
-    recherchée.
-  </p>
+<section class="weather-page" aria-live="polite">
+  @if (state$ | async; as state) {
+    @switch (state.status) {
+      @case ('loading') {
+        <p class="status-message">Chargement de la météo...</p>
+      }
+      @case ('data') {
+        <app-weather-card [weather]="state.weather" />
+      }
+      @case ('error') {
+        <p class="status-message status-message--error" role="alert">{{ state.message }}</p>
+      }
+    }
+  }
 </section>
