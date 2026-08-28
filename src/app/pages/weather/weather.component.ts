@@ -7,6 +7,7 @@ import { catchError, distinctUntilChanged, map, Observable, of, startWith, switc
 import { CurrentWeather } from '../../core/models/current-weather.model';
 import { CurrentWeatherService } from '../../core/services/current-weather.service';
 import { WeatherCardComponent } from '../../features/current-weather/weather-card/weather-card.component';
+import { ForecastPanelComponent } from '../../features/forecast/forecast-panel/forecast-panel.component';
 
 type WeatherViewState =
   | { status: 'loading' }
@@ -15,7 +16,7 @@ type WeatherViewState =
 
 @Component({
   selector: 'app-weather',
-  imports: [AsyncPipe, WeatherCardComponent],
+  imports: [AsyncPipe, WeatherCardComponent, ForecastPanelComponent],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

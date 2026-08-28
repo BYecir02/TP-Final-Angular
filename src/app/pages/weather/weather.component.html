@@ -6,6 +6,7 @@
       }
       @case ('data') {
         <app-weather-card [weather]="state.weather" />
+        <app-forecast-panel />
       }
       @case ('error') {
         <p class="status-message status-message--error" role="alert">{{ state.message }}</p>
