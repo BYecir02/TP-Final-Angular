@@ -24,6 +24,10 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should display the initial empty state', () => {
+    expect(fixture.nativeElement.textContent).toContain("Aucune recherche pour l'instant");
+  });
+
   it('should navigate to the selected city', () => {
     component.searchCity('Paris');
 

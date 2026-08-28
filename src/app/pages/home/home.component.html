@@ -5,4 +5,12 @@
   </p>
 
   <app-search-form (citySubmitted)="searchCity($event)" />
+
+  <div class="placeholder" aria-label="État de la recherche météo">
+    <span aria-hidden="true">☀</span>
+    <div>
+      <strong>Aucune recherche pour l'instant</strong>
+      <p>Saisissez le nom d'une ville ci-dessus pour afficher sa météo en direct.</p>
+    </div>
+  </div>
 </section>
